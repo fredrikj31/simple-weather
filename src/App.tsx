@@ -5,6 +5,8 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { Header } from "./components/Header";
+import { Sidebar } from "./components/Sidebar";
+import { useState } from "react";
 
 const fetchVersion = async (): Promise<{ version: string }> => {
   const response = await fetch("/version.json");
@@ -20,10 +22,14 @@ export const Version = () => {
 export const App = () => {
   const queryClient = new QueryClient();
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Header onMenuClick={() => alert("TODO: Implement Menu/Sheet")} />
+        <Header onMenuClick={() => setIsSidebarOpen(true)} />
+
+        <Sidebar isOpen={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
         <h1 className="text-5xl">Hello World!</h1>
         <p>Lorem Ipsum...</p>
         <Version />
