@@ -4,6 +4,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { Header } from "./components/Header";
 
 const fetchVersion = async (): Promise<{ version: string }> => {
   const response = await fetch("/version.json");
@@ -22,6 +23,7 @@ export const App = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <Header onMenuClick={() => alert("TODO: Implement Menu/Sheet")} />
         <h1 className="text-5xl">Hello World!</h1>
         <p>Lorem Ipsum...</p>
         <Version />
