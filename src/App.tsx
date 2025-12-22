@@ -9,6 +9,7 @@ import { useState } from "react";
 import { WeatherSummary } from "./components/WeatherSummary";
 import { WeatherDetailCard } from "./components/WeatherDetailCard";
 import { Droplet, Eye, Gauge, Wind } from "lucide-react";
+import { SearchPopup } from "./components/SearchPopup";
 
 const fetchVersion = async (): Promise<{ version: string }> => {
   const response = await fetch("/version.json");
@@ -25,13 +26,22 @@ export const App = () => {
   const queryClient = new QueryClient();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isSearchPopupOpen, setIsSearchPopupOpen] = useState<boolean>(false);
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Header onMenuClick={() => setIsSidebarOpen(true)} />
+        <Header
+          onMenuClick={() => setIsSidebarOpen(true)}
+          onSearchClick={() => setIsSearchPopupOpen(true)}
+        />
 
         <Sidebar isOpen={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
+        <SearchPopup
+          isOpen={isSearchPopupOpen}
+          onOpenChange={setIsSearchPopupOpen}
+          onSearch={(value) => alert(`TODO: Implement search: ${value}`)}
+        />
 
         <div className="flex flex-col gap-4 p-4">
           <WeatherSummary />
