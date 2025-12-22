@@ -7,6 +7,8 @@ import { Header } from "./components/Header";
 import { Sidebar } from "./components/Sidebar";
 import { useState } from "react";
 import { WeatherSummary } from "./components/WeatherSummary";
+import { WeatherDetailCard } from "./components/WeatherDetailCard";
+import { Droplet, Eye, Gauge, Wind } from "lucide-react";
 
 const fetchVersion = async (): Promise<{ version: string }> => {
   const response = await fetch("/version.json");
@@ -31,8 +33,19 @@ export const App = () => {
 
         <Sidebar isOpen={isSidebarOpen} onOpenChange={setIsSidebarOpen} />
 
-        <div className="p-4">
+        <div className="flex flex-col gap-4 p-4">
           <WeatherSummary />
+          <div className="grid grid-cols-2 gap-4">
+            <WeatherDetailCard
+              title="Wind Speed"
+              icon={Wind}
+              value="4.12 m/s"
+              subValue="250°"
+            />
+            <WeatherDetailCard title="Humidity" icon={Droplet} value="72%" />
+            <WeatherDetailCard title="Visibility" icon={Eye} value="10.0 km" />
+            <WeatherDetailCard title="Pressure" icon={Gauge} value="1013 hPa" />
+          </div>
         </div>
 
         <Version />
