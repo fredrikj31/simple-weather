@@ -1,3 +1,4 @@
+import { Button } from "@shadcn-ui/components/ui/button";
 import {
   QueryClient,
   QueryClientProvider,
@@ -24,6 +25,7 @@ export const App = () => {
         <h1 className="text-5xl">Hello World!</h1>
         <p>Lorem Ipsum...</p>
         <Version />
+        <Button>Click Me</Button>
       </QueryClientProvider>
     </>
   );
